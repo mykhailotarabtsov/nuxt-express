@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+.btn {
+  display: block;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  @apply bg-indigo-dark text-white;
+  transition: 0.3s;
+
+  @include on-event {
+    @apply bg-indigo-darker
+  }
+}
