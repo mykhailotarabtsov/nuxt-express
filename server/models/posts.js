@@ -1,14 +1,15 @@
 const getDb = require('../util/database').getDb;
-let ObjectID = require('mongodb').ObjectID;
+let ObjectID = require('mongodb').ObjectId;
 
 class Post {
-  constructor (title, imageUrl, description, previewText, author, updatedDate, editId) {
+  constructor (title, imageUrl, description, previewText, author, updatedDate, userId, editId) {
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
     this.previewText = previewText;
     this.author = author;
     this.updatedDate = updatedDate;
+    this.userId = userId;
     this.editId = editId || '';
   }
 
@@ -21,7 +22,8 @@ class Post {
       description: this.description,
       previewText: this.previewText,
       author: this.author,
-      updatedDate: this.updatedDate
+      updatedDate: this.updatedDate,
+      userId: this.userId
     });
     return dbOp
       .then(result => {
@@ -43,7 +45,7 @@ class Post {
 
   editPost () {
     const db = getDb();
-    return db.collection('posts').updateOne({_id: ObjectID(this.editId)}, {
+    return db.collection('posts').updateOne({_id: new ObjectID(this.editId)}, {
       $set: {
         "title": this.title,
         "imageUrl": this.imageUrl,

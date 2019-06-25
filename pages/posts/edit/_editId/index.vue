@@ -36,7 +36,7 @@ export default {
     async updatePost () {
       await this.$axios.$post('/posts/edit-post', {editId: this.$route.params.editId, ...this.post})
         .then(result => {
-          this.editPost({_id: this.$route.params.editId, ...this.post})
+          this.editPost({editId: this.$route.params.editId, ...this.post})
           this.$router.push({ path: '/posts' })
         })
     }

@@ -6,14 +6,14 @@
       <input class="mb-4 p-2" type="text" name="imageUrl" placeholder="image"  v-model="post.imageUrl">
       <textarea class="mb-4 resize-none" name="description" cols="30" rows="10" placeholder="Description" v-model="post.description"></textarea>
       <textarea class="mb-4 resize-none" name="previewText" cols="30" rows="10" placeholder="Preview Text" v-model="post.previewText"></textarea>
-      <input class="mb-4 p-2" type="text" name="author" placeholder="Author" v-model="post.author">
+      <!-- <input class="mb-4 p-2" type="text" name="author" placeholder="Author" v-model="post.author"> -->
       <button class="btn" @click.prevent="sendForm">Add Post</button>
     </form>
   </main>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -27,12 +27,18 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState({
+      userName: state => state.userName,
+    })
+  },
   methods: {
     ...mapMutations(['addPost']),
     async sendForm () {
+      this.post.author = this.userName
       await this.$axios.$post('/posts/add-post', this.post)
         .then(result => {
-          this.addPost(this.post)
+          this.addPost({...this.post, updatedDate: new Date()})
           this.$router.push({ path: '/posts' })
         })
 
