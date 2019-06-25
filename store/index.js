@@ -3,16 +3,31 @@ import Vuex from 'vuex'
 const createStore = () => {
   return new Vuex.Store({
     store: {
-      loadedPosts: []
+      loadedPosts: [],
+      userId: '5d11f6b3bc173874f4ad0941'
     },
     mutations: {
       setPosts (state, posts) {
         state.loadedPosts = posts
+      },
+      addPost (state, post) {
+        state.loadedPosts.push(post)
+      },
+      editPost (state, newPost) {
+        const postId = newPost._id
+        state.loadedPosts.map(post => {
+          if (post._id === postId) {
+            post.title = newPost.title
+            post.description = newPost.description
+            post.previewText = newPost.previexText
+            post.author = newPost.author
+            post.updatedDate = newPost.updatedDate || new Date()
+          }
+        })
       }
     },
     actions: {
       nuxtServerInit (vuexContext, context) {
-        // return context.$axios.$get('/api/posts')
         return context.$axios.$get('/get-posts')
           .then(res => {
             vuexContext.commit('setPosts', res.posts)

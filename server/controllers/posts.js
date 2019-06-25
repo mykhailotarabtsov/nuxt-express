@@ -12,16 +12,37 @@ exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
+  const previewText = req.body.previewText;
   const author = req.body.author;
   const updateDate = req.body.updateDate || new Date();
 
-  const post = new Post(title, imageUrl, description, author, updateDate);
+  const post = new Post(title, imageUrl, description, previewText, author, updateDate);
   post.save()
     .then(result => {
       console.log('Created product');
-      res.redirect('/posts');
+      res.status(200).end();
     })
     .catch(err => {
       console.log(err);
     });
 };
+
+exports.editPost = (req, res, next) => {
+  const title = req.body.title;
+  const imageUrl = req.body.imageUrl;
+  const description = req.body.description;
+  const previewText = req.body.previewText;
+  const author = req.body.author;
+  const updateDate = req.body.updateDate || new Date();
+  const editId = req.body.editId;
+
+  const post = new Post(title, imageUrl, description, previewText, author, updateDate, editId);
+  post.editPost()
+    .then(result => {
+      console.log('Updated');
+      res.status(200).end();
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}

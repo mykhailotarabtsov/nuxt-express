@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const mongoConnect = require('./util/database').mongoConnect;
+const User = require('./models/user')
 
 const app = express()
 
@@ -25,8 +26,16 @@ async function start() {
   } else {
     await nuxt.ready()
   }
-
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser());
+  // app.use(bodyParser.urlencoded({ extended: false }));
+  app.use((req, res, next) => {
+    User.findById('5d11f6b3bc173874f4ad0941')
+      .then(user => {
+        req.user = user;
+        next();
+      })
+      .catch(err => console.log(err))
+  })
   app.use(postsRoutes)
 
   // Give nuxt middleware to express
