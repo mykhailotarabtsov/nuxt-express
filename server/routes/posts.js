@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 const postsController = require('../controllers/posts.js');
 const router = express.Router();
