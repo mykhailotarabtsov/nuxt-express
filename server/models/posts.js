@@ -28,6 +28,7 @@ class Post {
     return dbOp
       .then(result => {
         console.log(result);
+        return result.insertedId;
       })
       .catch(err => {
         console.log(err);
@@ -55,6 +56,16 @@ class Post {
         "updatedDate": this.updatedDate
       }
     })
+      .then(result => {
+        return result;
+      })
+      .catch(err => console.log(err))
+  }
+
+  static deletePost (postId) {
+    const db = getDb();
+    console.log(postId)
+    return db.collection('posts').deleteOne({ _id: new ObjectID(postId) })
       .then(result => {
         return result;
       })

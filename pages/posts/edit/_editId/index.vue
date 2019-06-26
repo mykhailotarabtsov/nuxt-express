@@ -31,8 +31,7 @@ export default {
   methods: {
     ...mapMutations([
       'editPost'
-    ]
-    ),
+    ]),
     async updatePost () {
       await this.$axios.$post('/posts/edit-post', {editId: this.$route.params.editId, ...this.post})
         .then(result => {

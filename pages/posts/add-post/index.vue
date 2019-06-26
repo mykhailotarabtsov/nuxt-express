@@ -38,7 +38,7 @@ export default {
       this.post.author = this.userName
       await this.$axios.$post('/posts/add-post', this.post)
         .then(result => {
-          this.addPost({...this.post, updatedDate: new Date()})
+          this.addPost({...this.post, _id: result._id, updatedDate: new Date()})
           this.$router.push({ path: '/posts' })
         })
 

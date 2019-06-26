@@ -29,6 +29,12 @@ const createStore = () => {
             post.updatedDate = newPost.updatedDate || new Date()
           }
         })
+      },
+      deletePostFromStore (state, postId) {
+        let newPosts = state.loadedPosts.filter(post => {
+          return post._id !== postId
+        })
+        state.loadedPosts = newPosts
       }
     },
     actions: {

@@ -21,7 +21,8 @@ exports.postAddProduct = (req, res, next) => {
   post.save()
     .then(result => {
       console.log('Created product');
-      res.status(200).end();
+      console.log(result)
+      res.status(200).send({ _id: result });
     })
     .catch(err => {
       console.log(err);
@@ -46,4 +47,13 @@ exports.editPost = (req, res, next) => {
     .catch(err => {
       console.log(err);
     });
+}
+
+exports.deletePost = (req, res, next) => {
+  Post.deletePost(req.body.postId)
+    .then(result => {
+      console.log('Deleted from DB');
+      res.status(200).end();
+    })
+    .catch(err => console.log(err))
 }

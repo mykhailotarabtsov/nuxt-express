@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="'/posts/' + post._id" class="post bg-indigo-lightest border border-indigo-lighter p-2 rounded mb-4 mx-2">
+  <nuxt-link :to="'/posts/' + post._id" class="post bg-indigo-lightest border border-indigo-lighter p-2 rounded mb-4 mx-2 shadow-md">
     <h2 class="text-2xl mb-4 text-purple text-center">{{ post.title }}</h2>
     <div :style="'background-image: url(' + post.imageUrl + ')'" class="post__image mb-4"></div>
     <p class="text-purple-darker mb-8">{{ post.previewText }}</p>
