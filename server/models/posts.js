@@ -23,7 +23,7 @@ class Post {
       previewText: this.previewText,
       author: this.author,
       updatedDate: this.updatedDate,
-      userId: this.userId
+      userId: new ObjectID(this.userId)
     });
     return dbOp
       .then(result => {

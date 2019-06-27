@@ -16,6 +16,7 @@
 import { mapState, mapMutations } from 'vuex'
 
 export default {
+  middleware: 'protect',
   data () {
     return {
       post: {
@@ -23,19 +24,22 @@ export default {
         imageUrl: '',
         description: '',
         previewText: '',
-        author: ''
+        author: '',
+        _id: ''
       }
     }
   },
   computed: {
     ...mapState({
       userName: state => state.userName,
+      userId: state => state.userId
     })
   },
   methods: {
     ...mapMutations(['addPost']),
     async sendForm () {
       this.post.author = this.userName
+      this.post._id = this.userId
       await this.$axios.$post('/posts/add-post', this.post)
         .then(result => {
           this.addPost({...this.post, _id: result._id, updatedDate: new Date()})

@@ -9,7 +9,7 @@
         <p><span class="font-bold">Last Update:</span> {{ post.updatedDate | date }}</p>
       </div>
       <div class="flex justify-center">
-        <button @click="deletePost" class="btn mt-4 mx-2">Delete</button>
+        <button v-if="userId" @click="deletePost" class="btn mt-4 mx-2">Delete</button>
         <nuxt-link :to="'/posts/edit/' + post._id" tag="button" class="btn mt-4 mx-2">Edit</nuxt-link>
       </div>
     </div>
@@ -18,13 +18,18 @@
 
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
       post: []
     }
+  },
+  computed: {
+    ...mapState({
+      userId: state => state.userId
+    })
   },
   methods: {
     ...mapMutations (['deletePostFromStore']),

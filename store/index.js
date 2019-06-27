@@ -3,9 +3,10 @@ import Vuex from 'vuex'
 const createStore = () => {
   return new Vuex.Store({
     store: {
-      loadedPosts: [],
-      userId: '5d11f6b3bc173874f4ad0941',
-      userName: ''
+      userId: null,
+      userName: '',
+      userEmail: '',
+      loadedPosts: []
     },
     mutations: {
       setPosts (state, posts) {
@@ -14,6 +15,7 @@ const createStore = () => {
       setUser (state, user) {
         state.userId = user._id
         state.userName = user.firstName + ' ' + user.lastName
+        state.userEmail = user.email
       },
       addPost (state, post) {
         state.loadedPosts.push(post)
@@ -42,10 +44,13 @@ const createStore = () => {
         return context.$axios.$get('/get-posts')
           .then(res => {
             vuexContext.commit('setPosts', res.posts)
-            vuexContext.commit('setUser', res.user)
+            // vuexContext.commit('setUser', res.user)
           })
           .catch(err => context.error(err))
       },
+      setUser (vuexContext, user) {
+        vuexContext.commit('setUser', user)
+      }
     },
     getters: {
       loadedPosts (state) {

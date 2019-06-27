@@ -8,6 +8,7 @@ const User = require('./models/user')
 const app = express()
 
 const postsRoutes = require('./routes/posts')
+const authRoutes = require('./routes/auth')
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
@@ -28,14 +29,15 @@ async function start() {
   }
   app.use(bodyParser());
   // app.use(bodyParser.urlencoded({ extended: false }));
-  app.use((req, res, next) => {
-    User.findById('5d11f6b3bc173874f4ad0941')
-      .then(user => {
-        req.user = user;
-        next();
-      })
-      .catch(err => console.log(err))
-  })
+  // app.use((req, res, next) => {
+  //   User.findById('5d11f6b3bc173874f4ad0941')
+  //     .then(user => {
+  //       req.user = user;
+  //       next();
+  //     })
+  //     .catch(err => console.log(err))
+  // })
+  app.use(authRoutes)
   app.use(postsRoutes)
 
   // Give nuxt middleware to express

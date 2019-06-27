@@ -13,9 +13,10 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
+  middleware: 'protect',
   data () {
     return {
       post: {
@@ -28,11 +29,17 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState({
+      userName: state => state.userName
+    })
+  },
   methods: {
     ...mapMutations([
       'editPost'
     ]),
     async updatePost () {
+      this.post.author = this.userName
       await this.$axios.$post('/posts/edit-post', {editId: this.$route.params.editId, ...this.post})
         .then(result => {
           this.editPost({editId: this.$route.params.editId, ...this.post})

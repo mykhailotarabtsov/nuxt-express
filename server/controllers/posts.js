@@ -13,15 +13,14 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
   const previewText = req.body.previewText;
-  const author = req.user.firstName + ' ' + req.user.lastName;
+  const author = req.body.author;
   const updateDate = req.body.updateDate || new Date();
-  const userId = req.user._id
+  const userId = req.body._id
 
   const post = new Post(title, imageUrl, description, previewText, author, updateDate, userId);
   post.save()
     .then(result => {
       console.log('Created product');
-      console.log(result)
       res.status(200).send({ _id: result });
     })
     .catch(err => {
@@ -34,7 +33,7 @@ exports.editPost = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
   const previewText = req.body.previewText;
-  const author = req.user.firstName + ' ' + req.user.lastName;
+  const author = req.body.author;
   const updateDate = req.body.updateDate || new Date();
   const editId = req.body.editId;
 
