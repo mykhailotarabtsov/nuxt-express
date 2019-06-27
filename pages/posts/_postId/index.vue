@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-indigo-lightest py-10 px-5">
+  <div class="relative bg-indigo-lightest py-10 px-5">
     <div class="max-w-2xl mx-auto">
       <h2 class="text-2xl mb-4 text-purple text-center">{{ post.title }}</h2>
       <div :style="'background-image: url(' + post.imageUrl +')'" class="post__image"></div>
@@ -10,8 +10,9 @@
       </div>
       <div class="flex justify-center">
         <button v-if="userId" @click="deletePost" class="btn mt-4 mx-2">Delete</button>
-        <nuxt-link :to="'/posts/edit/' + post._id" tag="button" class="btn mt-4 mx-2">Edit</nuxt-link>
+        <button @click.stop.prevent="edit" class="btn mt-4 mx-2">Edit</button>
       </div>
+      <Error :error="error" />
     </div>
   </div>
 </template>
@@ -19,15 +20,21 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import Error from '@/components/Error/Error'
 
 export default {
+  components: {
+    Error
+  },
   data () {
     return {
-      post: []
+      post: [],
+      error: ''
     }
   },
   computed: {
     ...mapState({
+      userId: state => state.userId,
       userId: state => state.userId
     })
   },
@@ -39,6 +46,16 @@ export default {
           this.deletePostFromStore (this.$route.params.postId)
           this.$router.push({ path: '/posts' })
         })
+    },
+    edit () {
+      if (this.userId === this.post.userId) {
+        this.$router.push({ path: '/posts/edit/' + this.post._id })
+      } else {
+        this.error = '[Error] - You are not author of this post!'
+        setTimeout(() => {
+          this.error = ''
+        }, 2000)
+      }
     }
   },
   created () {

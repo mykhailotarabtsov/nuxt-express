@@ -1,7 +1,7 @@
 <template>
-  <main class="p-4 mt-4">
+  <main class="py-4 px-5 mt-4">
     <h1 class="text-center mb-6 text-purple-dark">Add new Post</h1>
-    <form class="flex flex-col w-1/2 mx-auto">
+    <form class="flex flex-col md:w-1/2 mx-auto">
       <input class="mb-4 p-2" type="text" name="title" placeholder="Title" v-model="post.title">
       <input class="mb-4 p-2" type="text" name="imageUrl" placeholder="image"  v-model="post.imageUrl">
       <textarea class="mb-4 resize-none" name="description" cols="30" rows="10" placeholder="Description" v-model="post.description"></textarea>
