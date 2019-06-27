@@ -53,6 +53,9 @@ const createStore = () => {
       }
     },
     getters: {
+      getError (state) {
+        return state.error
+      },
       loadedPosts (state) {
         return state.loadedPosts
       },

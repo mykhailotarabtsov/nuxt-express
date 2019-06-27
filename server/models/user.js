@@ -29,6 +29,16 @@ class User {
       .catch(err => console.log(err))
   }
 
+  static findOne (email) {
+    const db = getDb();
+    return db.collection('users').findOne({ email: email })
+      .then(user => {
+        console.log('Already Exist!')
+        return user;
+      })
+      .catch(err => console.log(err))
+  }
+
   static checkLogin (user) {
     const db = getDb();
     return db.collection('users').findOne({ email: user.email, password: user.password })
