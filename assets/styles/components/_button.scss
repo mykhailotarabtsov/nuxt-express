@@ -13,3 +13,15 @@
     @apply bg-indigo-darker
   }
 }
+
+.tiptap-btn {
+  display: block;
+  padding: 0.5rem;
+  @apply mr-1;
+  @apply bg-teal-dark text-white;
+  transition: 0.3s;
+
+  &.is-active {
+    @apply bg-teal-darkest;
+  }
+}

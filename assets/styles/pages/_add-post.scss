@@ -1,0 +1,7 @@
+.ProseMirror-focused {
+  outline: none;
+}
+
+.ProseMirror {
+  @apply p-4 border border-blue-light;
+}
