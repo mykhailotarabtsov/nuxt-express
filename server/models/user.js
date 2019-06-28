@@ -41,9 +41,9 @@ class User {
 
   static checkLogin (user) {
     const db = getDb();
-    return db.collection('users').findOne({ email: user.email, password: user.password })
+    return db.collection('users').findOne({ email: user.email })
       .then(result => {
-        console.log('Login is good!')
+        console.log('Login is good!');
         return result;
       })
       .catch(err => console.log(err))

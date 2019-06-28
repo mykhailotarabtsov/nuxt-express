@@ -12,7 +12,6 @@
         <button v-if="userId" @click="deletePost" class="btn mt-4 mx-2">Delete</button>
         <button @click.stop.prevent="edit" class="btn mt-4 mx-2">Edit</button>
       </div>
-      <Error :error="error" />
     </div>
   </div>
 </template>
@@ -20,12 +19,8 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import Error from '@/components/Error/Error'
 
 export default {
-  components: {
-    Error
-  },
   data () {
     return {
       post: [],

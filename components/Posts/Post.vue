@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="'/posts/' + post._id" class="relative post bg-indigo-lightest border border-indigo-lighter p-2 rounded mb-4 mx-2 shadow-md">
+  <nuxt-link :to="'/posts/' + post._id" class="relative post bg-indigo-lightest border border-indigo-lighter p-2 rounded mb-4 mx-2 shadow-md" :class="{'error': error}">
     <h2 class="text-2xl mb-4 text-purple text-center">{{ post.title }}</h2>
     <div :style="'background-image: url(' + post.imageUrl + ')'" class="post__image mb-4"></div>
     <p class="text-purple-darker mb-8">{{ post.previewText }}</p>
@@ -11,22 +11,17 @@
       <button class="btn mt-4 mx-4">Read...</button>
       <button @click.stop.prevent="edit" class="btn mt-4 mx-4">Edit</button>
     </div>
-    <Error :error="error" />
   </nuxt-link>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import Error from '@/components/Error/Error'
 
 export default {
   props: ['post'],
-  components: {
-    Error
-  },
   data () {
     return {
-      error: ''
+      error: false
     }
   },
   computed: {
@@ -39,10 +34,10 @@ export default {
       if (this.userId === this.post.userId) {
         this.$router.push({ path: '/posts/edit/' + this.post._id })
       } else {
-        this.error = '[Error] - You are not author of this post!'
+        this.error = true;
         setTimeout(() => {
-          this.error = ''
-        }, 2000)
+          this.error = false
+        }, 500)
       }
     }
   }
