@@ -1,7 +1,26 @@
-.ProseMirror-focused {
-  outline: none;
-}
+.editor {
+  .ProseMirror-focused {
+    outline: none;
+  }
 
-.ProseMirror {
-  @apply p-4 border border-blue-light;
+  .ProseMirror {
+    @apply p-4 border border-blue-light;
+  }
+
+  &__content pre code {
+    display: inline-block;
+    padding: .4rem .6rem;
+    border-radius: 5px;
+    font-size: .8rem;
+    font-weight: 700;
+    background: rgba(0,0,0,.1);
+    color: rgba(0,0,0,.8);
+  }
+
+  &__content blockquote {
+    border-left: 3px solid rgba(0,0,0,.1);
+    color: rgba(0,0,0,.8);
+    padding-left: .8rem;
+    font-style: italic;
+  }
 }
