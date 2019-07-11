@@ -1,16 +1,15 @@
 <template>
   <main class="py-4 px-5 mt-4">
     <h1 class="text-center mb-6 text-purple-dark">Add new Post</h1>
-    <!-- <form class="flex flex-col md:w-1/2 mx-auto">
+    <form class="flex flex-col md:w-1/2 mx-auto">
       <input class="mb-4 p-2" type="text" name="title" placeholder="Title" v-model="post.title">
       <input class="mb-4 p-2" type="text" name="imageUrl" placeholder="image"  v-model="post.imageUrl">
       <textarea class="mb-4 resize-none" name="description" cols="30" rows="10" placeholder="Description" v-model="post.description"></textarea>
-      <textarea class="mb-4 resize-none" name="previewText" cols="30" rows="10" placeholder="Preview Text" v-model="post.previewText"></textarea> -->
-      <!-- <input class="mb-4 p-2" type="text" name="author" placeholder="Author" v-model="post.author"> -->
-      <!-- <button class="btn" @click.prevent="sendForm">Add Post</button>
-    </form> -->
+      <textarea class="mb-4 resize-none" name="previewText" cols="30" rows="10" placeholder="Preview Text" v-model="post.previewText"></textarea>
+      <button class="btn" @click.prevent="sendForm">Add Post</button>
+    </form>
 
-    <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }" class="editor__content">
+    <!-- <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }" class="editor__content">
       <div class="flex mb-4">
         <button class="tiptap-btn" :class="{ 'is-active': isActive.heading({ level: 1 }) }" @click="commands.heading({ level: 1 })">
           H1
@@ -51,13 +50,13 @@
         <button class="tiptap-btn" :class="{ 'is-active': isActive.code_block() }" @click="commands.code_block">
           Code Block
         </button>
-        <button class="tiptap-btn ml-auto"  @click="commands.code_block">
+        <button class="tiptap-btn ml-auto"  @click="">
           Send New Post
         </button>
       </div>
-    </editor-menu-bar>
+    </editor-menu-bar> -->
 
-    <editor-content class="editor__content max-w-lg mx-auto" :editor="editor" />
+    <!-- <editor-content class="editor__content max-w-lg mx-auto" :editor="editor" /> -->
 
   </main>
 </template>

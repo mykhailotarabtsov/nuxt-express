@@ -10,7 +10,7 @@
       </div>
       <div class="flex justify-center">
         <button v-if="userId" @click="deletePost" class="btn mt-4 mx-2">Delete</button>
-        <button @click.stop.prevent="edit" class="btn mt-4 mx-2">Edit</button>
+        <button @click.stop.prevent="edit" class="btn mt-4 mx-2" :class="{'error': error}">Edit</button>
       </div>
     </div>
   </div>
@@ -29,7 +29,6 @@ export default {
   },
   computed: {
     ...mapState({
-      userId: state => state.userId,
       userId: state => state.userId
     })
   },
@@ -49,7 +48,7 @@ export default {
         this.error = '[Error] - You are not author of this post!'
         setTimeout(() => {
           this.error = ''
-        }, 2000)
+        }, 500)
       }
     }
   },
